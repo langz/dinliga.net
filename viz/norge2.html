@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+	<head>
+
+		<meta charset="utf-8">
+		<title>D3.js - Folkemengde og befolkningsendringer</title>
+		<script type="text/javascript" src="d3.v3.js"></script>
+		<style type="text/css">
+h1{font-family: Georgia, "Times New Roman", Times, serif;
+        font-size:24px;
+	margin-top: 5px; margin-bottom: 0px;
+	text-align: center;
+        font-weight: normal;
+        color: #222;}
+		p{         font-family: Georgia, "Times New Roman", Times, serif;
+	  color:#381704;
+	  font-size:10px;
+	  letter-spacing:0.1em;
+	  text-align:center;
+	  line-height:200%;}
+		#bot{
+position:relative;
+top:800px;
+
+}
+		#tooltip {
+				position: absolute;
+				width: 200px;
+				height: auto;
+				padding: 10px;
+				background-color: white;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				pointer-events: none;
+				
+			}
+			
+			#tooltip.hidden {
+				display: none;
+			}
+			
+			#tooltip p {
+				margin: 0;
+				font-family: sans-serif;
+				font-size: 16px;
+				line-height: 20px;
+			}
+			#top{
+				position: absolute;
+				width: 200px;
+				height: auto;
+				left:0px;
+				top:50px;
+			}
+			html{
+	
+			}
+			#map{
+			position:absolute;
+			left:0px;
+			top:0px;
+			}
+	
+			#right{
+			position:absolute;
+			left:750px;
+			top:50px;
+			}
+			#bar{
+			
+			}
+			#bar path {
+				stroke: steelblue;
+				stroke-width: 1;
+				fill: none;
+			}
+			
+			#bar .axis {
+			  shape-rendering: crispEdges;
+			}
+ 
+			#bar .x.axis line {
+			  stroke: lightgrey;
+			}
+ 
+			#bar .x.axis .minor {
+			  stroke-opacity: .5;
+			}
+ 
+			#bar .x.axis path {
+			  display: none;
+			}
+ 
+			#bar .y.axis line, .y.axis path {
+			  fill: none;
+			  stroke: #000;
+			}
+			form {
+  font-family: Georgia, "Times New Roman", Times, serif;
+	  color:#381704;
+	  font-size:10px;
+	  letter-spacing:0.1em;
+	  line-height:200%;
+}
+
+
+		</style>
+	</head>
+	<div id="container">
+	<div id="map"><form>
+  <label><input onchange="metoden(this.value, '0000 Alle husholdninger', 2012)" type="radio" name="dataset" value="Inntekt etter skatt, median (kr)" checked>Inntekt</label>
+  <label><input onchange="metoden(this.value, '0000 Alle husholdninger', 2012)" type="radio" name="dataset" value="Husholdninger">Husholdninger</label>
+  </form></div>
+
+	<div id="right">
+	<div id="pie"></div>
+	<div id="bar"></div>
+	</div>
+	<body>
+			<h1>
+	Inntekt etter skatt, etter husholdningstype(2005-2012).
+	</h1>
+	<div id="top">
+	</div>
+			<div id="tooltip" class="hidden">
+			<p><span id="subject">Important Label Heading</span></p>
+			<p><span id="value">100</span></p>
+		</div>
+		</div>
+		<script type="text/javascript">
+
+			//Width and height of the SVG-element
+			var w = 700;
+			var h = 800;
+			var svg;
+			var vis;
+			var graph;
+			var h1;
+
+var metoden = function(param, paramH, paramTid){	
+
+if(svg){
+		d3.select("#map svg").remove();
+	   d3.select("#pie svg").remove();
+	   d3.select("#pie h1").remove();
+	   d3.select("#pie p").remove();
+	   d3.select("#bar svg").remove();
+	   
+}
+
+var statvariabel = param;  
+			//Defines default path generator, centers and rotates in on norway. Scales to fit.
+var husholdVar = paramH;
+var tidsVar = paramTid;
+var projection = d3.geo.albers()
+    .center([0, 65])
+    .rotate([-17, 0])
+    .parallels([60, 68])
+    .scale(3000)
+    .translate([w / 2, h / 2]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+
+	//Define quantize scale to sort data values into 12 different buckets of green-color
+	var color;
+	if(statvariabel==="Inntekt etter skatt, median (kr)"){
+			 color = d3.scale.quantize().range(["rgb(237,248,233)", "rgb(186,228,179)","rgb(116,196,118)", "rgb(49,163,84)","rgb(0,109,44)"]);
+}
+else{
+color=d3.scale.quantize().range(["rgb(237,248,233)","rgb(206,236,196)","rgb(175,224, 158)","rgb(143,212,118)","rgb(111,200,80)", "rgb(95,193,61)", "rgb(86,173,55)","rgb(67,135,43)", "rgb(57,115,37)" ,"rgb(47,96,30)", "rgb(38,77,25)", "rgb(29,58,18)"]);
+}
+
+			//Create SVG element
+			svg = d3.select("#map")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+						
+						var g = svg.append("g");
+				
+	console.log("starta");			
+				//Load in statistics from SSB
+			d3.csv("kommuner.csv", function(data) {
+
+				//Sets input domain for color scale based on the dataVariabel.
+				
+						color.domain([
+					d3.min(data, function(d) { 
+					if(d.statistikkvariabel === statvariabel && d.husholdningstype === husholdVar && parseInt(d.tid) === tidsVar){
+		
+						if(parseInt(d.verdi)===0){
+				}
+				else{
+					return +d.verdi
+					}};
+					}), 
+										d3.max(data, function(d) { 
+					if(d.statistikkvariabel === statvariabel && d.husholdningstype === husholdVar && parseInt(d.tid) === tidsVar){
+				if(parseInt(d.verdi)===0){
+				}
+				else{
+					return +d.verdi
+					}};
+					})
+				]);
+				
+		
+				
+				
+		
+		
+
+				//Loads in GeoJSON data of the Norwegians fylker
+				
+				d3.json("kommuner.json", function(json) {
+
+					//Merges the SSB Statistic and GeoJSON-data about Norways kommuner
+					//Loop through once for each row in SSB Statistic
+					for (var i = 0; i < data.length; i++) {
+				
+					//Checks for the actual statisticVariabel
+					var statVar = data[i].statistikkvariabel;
+					var husVar = data[i].husholdningstype;
+					var tidVar = parseInt(data[i].tid);
+		
+								if(statVar === statvariabel){
+					
+					
+				
+						//Grab kommune navn
+						var dataState = data[i].region;
+						//Grab kommuneID
+						var kommId=dataState.substring(0,4);
+				
+						
+				
+						//Find the corresponding kommune inside the GeoJSON of Norways kommuner
+						for (var j = 0; j < json.features.length; j++) {
+						
+						var jsonKommId = String(json.features[j].properties.KOMM);
+						
+						if(jsonKommId.length===3){
+						
+						jsonKommId = "0"+jsonKommId;
+						}	
+					
+							if (kommId===jsonKommId) {
+							json.features[j].properties.typeData=statvariabel;
+							if(husVar==="0000 Alle husholdninger"){
+							var dataValue = parseInt(data[i].verdi);
+														//Copy the statisticVariabel value into the JSON
+								if(dataValue!==0){
+					
+								json.features[j].properties["alle"+tidVar] = dataValue;
+
+								//Stop looking through the JSON
+								break;
+								}
+							
+							}
+							else if(husVar==="0001 Aleneboende"){
+							var dataValue = parseInt(data[i].verdi);
+														//Copy the statisticVariabel value into the JSON
+								if(dataValue!==0){
+								json.features[j].properties["alene"+tidVar] = dataValue;
+								//Stop looking through the JSON
+								break;
+								}
+							
+							}
+							else if(husVar==="0002 Par uten barn"){
+							var dataValue = parseInt(data[i].verdi);
+														//Copy the statisticVariabel value into the JSON
+								if(dataValue!==0){
+								json.features[j].properties["paru"+tidVar] = dataValue;
+								//Stop looking through the JSON
+								break;
+								}
+							
+							}
+							else if(husVar==="0003 Par med barn 0-17 år"){
+							var dataValue = parseInt(data[i].verdi);
+														//Copy the statisticVariabel value into the JSON
+								if(dataValue!==0){
+							json.features[j].properties["parm"+tidVar] = dataValue;
+								//Stop looking through the JSON
+								break;
+								}
+							
+							}
+							else if(husVar==="0004 Enslig mor/far med barn 0-17 år"){
+								var dataValue = parseInt(data[i].verdi);
+															//Copy the statisticVariabel value into the JSON
+								if(dataValue!==0){
+								json.features[j].properties["enslig"+tidVar] = dataValue;
+								//Stop looking through the JSON
+								break;
+								}
+								
+							}
+							
+							}
+						}		
+					}
+					else{}
+					}
+
+					//Bind data and create one path per GeoJSON feature
+					g.selectAll("path")
+					   .data(json.features)
+					   .enter()
+					   .append("path")
+					   .attr("d", path)
+					   .attr("stroke", "black")
+					   .attr("stroke-width", 1)
+					   .style("fill", function(d) {
+			
+					   		//Get data value
+					   		var value = d.properties.alle2012;
+					   		
+					   		if (value) {
+					   			//If value exists…
+							
+						   		return color(value);
+					   		} else {
+					   	
+						   		return "#ccc";
+					   		}
+					   })
+					   			   .on("mouseover", function(d) {
+
+					//Get this bar's x/y values, then augment for the tooltip
+					var xPosition = 0;
+					var yPosition = 250;
+
+					//Update the tooltip position and value
+					d3.select("#tooltip")
+						.style("left", xPosition + "px")
+						.style("top", yPosition + "px")						
+						.select("#value")
+						.text(d.properties.alle2012);
+			   
+			   d3.select("#tooltip")
+					.select("#subject").
+					text(d.properties.NAVN);
+					
+					//Show the tooltip
+					d3.select("#tooltip").classed("hidden", false);
+
+			   })
+			   .on("mouseout", function() {
+			   
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+					
+			   })
+			   .on("click", function (d) {
+			   
+			piechart(d.properties);
+			   });
+			
+				});
+			
+			});
+						var zoom = d3.behavior.zoom()
+    .on("zoom",function() {
+        g.attr("transform","translate("+ 
+            d3.event.translate.join(",")+")scale("+d3.event.scale+")");
+        g.selectAll("path")  
+            .attr("d", path.projection(projection)); 
+});
+svg.call(zoom);
+
+//Method to create the piechart, dataS-param is the clicked kommunes JSON-object(properties).
+var piechart=function(dataS){
+
+//If there is a header(h1) allready, remove header and paragraph
+if(h1){
+
+d3.select("#pie h1").remove();
+d3.select("#pie p").remove();
+}
+//Create Header and Paragraph
+h1=d3.select("#pie").append("h1").text(dataS.NAVN);
+d3.select("#pie").append("p").text(function(){
+console.log(dataS);
+if(dataS.typeData==="Inntekt etter skatt, median (kr)"){
+return "Husholdningstype fordelt på inntekt etter skatt";
+}
+else{
+return "Husholdningstype fordelt på antall";
+}
+});
+//If there is a piechart allready, remove the existing pieChart.
+if(vis){
+
+d3.select("#pie svg")
+       .remove();
+}
+// If there is a graph of a previous piechart, remove it.
+	if(graph){
+
+d3.select("#bar svg")
+       .remove();
+}
+	//Creates the data to be presented, based on the methods param(dataS)
+		var dataSet =[		
+			{"legendLabel":"Aleneboende", "verdi":dataS.alene2012},
+			{"legendLabel":"Par uten barn", "verdi":dataS.paru2012}, 
+			{"legendLabel":"Par med barn", "verdi":dataS.parm2012}, 
+			{"legendLabel":"Enslig med barn", "verdi":dataS.enslig2012}
+			];
+
+
+	var canvasWidth = 400, //width
+      canvasHeight = 350,   //height
+      outerRadius = 120,   //radius
+      color = d3.scale.category20(); //builtin range of colors
+
+    
+     vis = d3.select("#pie")
+      .append("svg:svg") //create the SVG element inside the <body>
+        .data([dataSet]) //associate our data with the document
+        .attr("width", canvasWidth) //set the width of the canvas
+        .attr("height", canvasHeight) //set the height of the canvas
+        .append("svg:g") //make a group to hold our pie chart
+          .attr("transform", "translate(" + 1.5*outerRadius + "," + 1.5*outerRadius + ")") // relocate center of pie to 'outerRadius,outerRadius'
+
+    // This will create <path> elements for us using arc data...
+    var arc = d3.svg.arc()
+      .outerRadius(outerRadius);
+
+    var pie = d3.layout.pie() //this will create arc data for us given a list of values
+      .value(function(d) { return d.verdi; }) // Binding each value to the pie
+      .sort( function(d) { return null; } );
+
+    // Select all <g> elements with class slice (there aren't any yet)
+    var arcs = vis.selectAll("g.slice")
+      // Associate the generated pie data (an array of arcs, each having startAngle,
+      // endAngle and value properties) 
+      .data(pie)
+      // This will create <g> elements for every "extra" data element that should be associated
+      // with a selection. The result is creating a <g> for every object in the data array
+      .enter()
+      // Create a group to hold each slice (we will have a <path> and a <text>
+      // element associated with each slice)
+      .append("svg:g")
+      .attr("class", "slice")
+	  .on("click", function() {
+	  
+
+	 linegraph(d3.select(this).select("text").text(), dataS);
+    
+});    //allow us to style things in the slices (like text)
+	
+    arcs.append("svg:path")
+      //set the color for each slice to be chosen from the color function defined above
+      .attr("fill", function(d, i) { return color(i); } )
+      //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+      .attr("d", arc);
+
+    // Add a legendLabel to each arc slice...
+    arcs.append("svg:text")
+      .attr("transform", function(d) { //set the label's origin to the center of the arc
+        //we have to make sure to set these before calling arc.centroid
+        d.outerRadius = outerRadius + 50; // Set Outer Coordinate
+        d.innerRadius = outerRadius + 45; // Set Inner Coordinate
+        return "translate(" + arc.centroid(d) + ")";
+      })
+      .attr("text-anchor", "center") //center the text on it's origin
+      .style("fill", "Black")
+      .style("font", "bold 12px Arial")
+      .text(function(d, i) { return dataSet[i].legendLabel; }); //get the label from our original data array
+
+    // Add a magnitude value to the larger arcs, translated to the arc centroid and rotated.
+    arcs.filter(function(d) { return d.endAngle - d.startAngle > .2; }).append("svg:text")
+      .attr("dy", ".35em")
+      .attr("text-anchor", "middle")
+      //.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")"; })
+      .attr("transform", function(d) { //set the label's origin to the center of the arc
+        //we have to make sure to set these before calling arc.centroid
+        d.outerRadius = outerRadius; // Set Outer Coordinate
+        d.innerRadius = outerRadius/2; // Set Inner Coordinate
+        return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")";
+      })
+      .style("fill", "White")
+      .style("font", "bold 12px Arial")
+      .text(function(d) { return d.data.verdi; });
+
+    // Computes the angle of an arc, converting from radians to degrees.
+    function angle(d) {
+      var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
+      return a > 90 ? a - 180 : a;
+    }
+	
+	}
+	// Function for creating the graph.
+	var linegraph = function(param1, param2){
+	//If there already exists a graph, remove it.
+	if(graph){
+
+d3.select("#bar svg").remove();
+}
+
+
+//Initializes the variable dataG, which is dependent on param1.
+var dataG;
+if(param1==="Par med barn"){
+// create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+		 dataG = [param2.parm2005, param2.parm2006, param2.parm2007, param2.parm2008, param2.parm2009, param2.parm2010, param2.parm2011, param2.parm2012 ];
+
+
+}
+else if(param1==="Aleneboende"){
+// create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+		 dataG = [param2.alene2005, param2.alene2006, param2.alene2007, param2.alene2008, param2.alene2009, param2.alene2010, param2.alene2011, param2.alene2012 ];
+
+}
+else if(param1==="Par uten barn"){
+// create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+		  dataG = [param2.paru2005, param2.paru2006, param2.paru2007, param2.paru2008, param2.paru2009, param2.paru2010, param2.paru2011, param2.paru2012 ];
+
+
+}
+else if(param1==="Enslig med barn"){
+// create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+		 dataG = [param2.enslig2005, param2.enslig2006, param2.enslig2007, param2.enslig2008, param2.enslig2009, param2.enslig2010, param2.enslig2011, param2.enslig2012 ];
+
+
+}
+	
+			var m = [20, 20, 60, 85]; // margins
+		var w = 400 - m[1] - m[3]; // width
+		var h = 380 - m[0] - m[2]; // height
+		
+		// X scale will fit all values from data[] within pixels 0-w
+		var x = d3.scale.linear().domain([0, 7]).range([0, w]);
+		// Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+		//Function for dynamically  set the scale for the y-axis
+		var y = d3.scale.linear().
+						domain([
+					d3.min(dataG, function(d) {
+	
+					return +d;
+					}), 
+				d3.max(dataG, function(d) { 
+	
+					return +d;
+					})
+				])
+		
+		
+		.range([h, 0]);
+		
+
+
+		// create a line function that can convert data[] into x and y points
+		var line = d3.svg.line()
+			// assign the X function to plot our line as we wish
+			.x(function(d,i) { 
+				// verbose logging to show what's actually being done
+				console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+				// return the X coordinate where we want to plot this datapoint
+				return x(i); 
+			})
+			.y(function(d) { 
+				// verbose logging to show what's actually being done
+				console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+				// return the Y coordinate where we want to plot this datapoint
+				return y(d); 
+			});
+
+			// Add an SVG element with the desired dimensions and margin.
+			 graph = d3.select("#bar").append("svg:svg")
+			      .attr("width", w + m[1] + m[3])
+			      .attr("height", h + m[0] + m[2])
+			    .append("svg:g")
+			      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+			// create yAxis
+			var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true);
+			// Add the x-axis.
+			graph.append("svg:g")
+			      .attr("class", "x axis")
+			      .attr("transform", "translate(0," + h + ")")
+			      .call(xAxis);
+
+
+			// create left yAxis
+			var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left");
+			// Add the y-axis to the left
+			graph.append("svg:g")
+			      .attr("class", "y axis")
+			      .attr("transform", "translate(-25,0)")
+			      .call(yAxisLeft);
+			
+  			// Add the line by appending an svg:path element with the data line we created above
+			// do this AFTER the axes above so that the line is above the tick-lines
+  			graph.append("svg:path").attr("d", line(dataG));
+			
+			//Changes the values of the x-axis to relevant years.
+			//Not a good solution, but didnt manage to change the x-axis scale(domain, range) and still make it work.
+	d3.selectAll("g.x.axis g.tick.major text")
+			 .text(function(){
+			 if(d3.select(this).text()==="0"){
+			
+			 return "2005";
+			 }
+			 			 else if(d3.select(this).text()==="1"){
+			 return "2006";
+			 }
+			 			 else if(d3.select(this).text()==="2"){
+			 return "2007";
+			 }
+			 			else if(d3.select(this).text()==="3"){
+			 return "2008";
+			 }
+			 			else if(d3.select(this).text()==="4"){
+			 return "2009";
+			 }
+			 			else if(d3.select(this).text()==="5"){
+			 return "2010";
+			 }
+			 			else if(d3.select(this).text()==="6"){
+			 return "2011";
+			 }
+			 			 			else if(d3.select(this).text()==="7"){
+			 return "2012";
+			 }
+			 else{
+			 }
+			 });
+	}
+			}
+
+//First time, it presents data about Inntekt for alle husholdninger in 2012.
+			metoden("Inntekt etter skatt, median (kr)", "0000 Alle husholdninger", 2012);
+
+		</script>
+		 <div id="bot"><p>This example is built with <a href="http://d3js.org/">d3.js</a>, data from <a href="http://data.ssb.no/api/v0/dataset/49678?lang=no">SSB</a> and licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License</a></p>
+</div>
+	</body>
+</html>

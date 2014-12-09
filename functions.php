@@ -1,0 +1,1 @@
+function x_mb_ucfirst($string){  return mb_strtoupper(mb_substr($string, 0, 1)) . mb_strtolower(mb_substr($string, 1));}mb_internal_encoding('UTF-8');echo x_mb_ucfirst('זרו'), "\n";

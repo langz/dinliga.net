@@ -1,0 +1,230 @@
+{
+ "name": "Modern IR",
+ "children": [
+  {
+   "name": "Intro",
+   "children": [
+    {"name": "IR", "size": 2},
+    {"name": "IR Problem", "size": 2},
+    {"name": "IR System", "size": 3},
+    {"name": "The Web", "size": 5}, 
+	{"name": "Organization", "size": 5}, 
+	{"name": "Website", "size": 1}, 
+	{"name": "Discussion", "size": 4}
+   ]
+  },
+   {
+   "name": "UI for Search",
+   "children": [
+    {"name": "Intro", "size": 1},
+    {"name": "How People Search", "size": 4},
+    {"name": "Search Interfaces", "children": [
+      {"name": "Query Specification", "size": 4},
+      {"name": "Retrieval Results Display", "size": 2},
+      {"name": "Query Reformulation", "size": 3}, 
+	  {"name": "Organizing Results", "size": 7}
+     ]},
+    {"name": "Visualization", "size": 8}, 
+	{"name": "Design & Evaluation", "size": 5}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 2}
+   ]
+  },
+    {
+   "name": "Modelling",
+   "children": [
+    {"name": "IR Models", "size": 4},
+    {"name": "Classic IR",    "children": [
+      {"name": "Basic Concepts", "size": 1},
+      {"name": "Boolean Model", "size": 2},
+      {"name": "Term Weighting", "size": 2},
+      {"name": "TF-IDF Weights", "size": 8},
+	  {"name": "Document Length Normalization", "size": 1},
+	  {"name": "Vector Model", "size": 3},
+	  {"name": "Probabilistic Model", "size": 6}, 
+	   {"name": "Comparison", "size": 1}
+     ]},
+    {"name": "Set Theoretic Models", "children": [
+      {"name": "Set-Based Model", "size": 5},
+      {"name": "Extended Boolean Model", "size": 3},
+      {"name": "Fuzzy Set Model", "size": 4}
+     ]},
+    {"name": "Algebraic Models", "children": [
+      {"name": "Vector Space", "size": 2},
+      {"name": "Latent Semantic Indexing", "size": 2},
+      {"name": "Neural Network", "size": 2}
+     ]}, 
+	{"name": "Probabilistic Models", "children": [
+      {"name": "BM25", "size": 2},
+      {"name": "Language Models", "size": 6},
+      {"name": "Bayesian Network", "size": 8}
+     ]}, 
+	{"name": "Other Models", "size": 3}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 3}
+   ]
+  },
+    {
+   "name": "Retrieval Evaluation",
+   "children": [
+    {"name": "Intro", "size": 1},
+    {"name": "The Cranfield Paradigm", "size": 3},
+    {"name": "Retrieval Metrics", "children": [
+      {"name": "Precision & Recall", "size": 5},
+      {"name": "SingleValueSummaries:P@N, F", "size": 4},
+      {"name": "User-Oriented Measures", "size": 1}, 
+	  {"name": "Discounted Cumulated Gain", "size": 5}, 
+	  {"name": "Binary Preferences", "size": 3}, 
+	  {"name": "Rank Correlation Metrics", "size": 5}
+     ]},
+    {"name": "Reference Collections", "size": 10}, 
+	{"name": "User-Based Evaluation", "size": 5}, 
+	{"name": "Practical Caveats", "size": 1}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 2}
+   ]
+  },
+      {
+   "name": "Relevance Feedback & Query Expansion",
+   "children": [
+    {"name": "Intro", "size": 1},
+    {"name": "Framework", "size": 2},
+    {"name": "Explicit Relevance Feedback", "size": 5},
+    {"name": "Explicit Feedback Clicks", "size": 5}, 
+	{"name": "Implicit Feedback Local Analysis", "size": 5}, 
+	{"name": "Implicit Feedback Global Analysis", "size": 5}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 3}
+   ]
+  },
+      {
+   "name": "Queries",
+   "children": [
+    {"name": "Query Languages", "size": 12},
+    {"name": "Query Properties", "size": 10},
+	{"name": "Trends & Research", "size": 2}, 
+	{"name": "Discussion", "size": 2}
+   ]
+  },
+      {
+   "name": "Text Classification",
+   "children": [
+    {"name": "Intro", "size": 1},
+    {"name": "A Characterization of Text Classification", "size": 3},
+    {"name": "Unsupervised Algorithms", "children": [
+      {"name": "Clustering", "size": 5},
+      {"name": "Naive Text Classification", "size": 1}
+     ]},
+    {"name": "Supervised Algorithms", "children": [
+      {"name": "Decision Trees", "size": 5},
+      {"name": "k-NN Classifier", "size": 1},
+      {"name": "Rocchio Classifier", "size": 3}, 
+	  {"name": "Probabilistic Naive Bayes", "size": 4}, 
+	  {"name": "The SVM Classifier", "size": 9}, 
+		{"name": "Ensemble Classifiers", "size": 3}
+     ]}, 
+	{"name": "Feature Selection/Dimensionality Reduction", "size": 5}, 
+	{"name": "Evaluation Metrics", "children": [
+      {"name": "Contingency Table", "size": 1},
+      {"name": "Accuracy & Error", "size": 1},
+      {"name": "Precision & Recall", "size": 1}, 
+	  {"name": "F-Measure", "size": 1}, 
+	  {"name": "The SVM Classifier", "size": 1}
+     ]}, 
+	{"name": "Building Taxonomies", "size": 2}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 4}
+   ]
+  },
+      {
+   "name": "Indexing & Searching",
+   "children": [
+    {"name": "Intro", "size": 3},
+    {"name": "Inverted Indexes", "children": [
+      {"name": "Basic Concepts", "size": 1},
+      {"name": "Full Inverted Indexes", "size": 4},
+      {"name": "Searching", "size": 4}, 
+	  {"name": "Ranking", "size": 2}, 
+	  {"name": "Construction", "size": 3}, 
+		{"name": "Compressed", "size": 3}
+     ]},
+    {"name": "Signature Files", "size": 3},
+    {"name": "Suffix Trees & Arrays", "size": 12}, 
+	{"name": "Sequential Searching", "size": 19}, 
+	{"name": "Multi-dimensional Indexing", "size": 2}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 5}
+   ]
+  },
+      {
+   "name": "Web Retrieval",
+   "children": [
+    {"name": "Intro", "size": 2},
+    {"name": "A Challenging Problem", "size": 2},
+    {"name": "The Web", "size": 7},
+    {"name": "Search Engine Architectures", "size": 11}, 
+	{"name": "Search Engine Ranking", "size": 9}, 
+	{"name": "Managing Web Data", "size": 2}, 
+	{"name": "Search Engine User Interaction", "children": [
+      {"name": "Search Rectangle Paradigm", "size": 8},
+      {"name": "The Search Engine Result Page", "size": 9},
+      {"name": "Educating the User", "size": 1}
+     ]}, 
+	{"name": "Browsing", "size": 3}, 
+	{"name": "Beyond Browsing", "size": 3}, 
+	{"name": "Related Problems", "size": 5}, 
+	{"name": "Trends & Research", "size": 2}, 
+	{"name": "Discussion", "size": 3}
+   ]
+  },
+      {
+   "name": "Web Crawling",
+   "children": [
+    {"name": "Intro", "size": 2},
+    {"name": "Applications of a Web Crawler", "size": 2},
+    {"name": "A Taxonomy of Web Crawlers", "size": 2},
+    {"name": "Architecture & Implementation", "size": 6}, 
+	{"name": "Scheduling Algorithms", "children": [
+      {"name": "Selection Policy", "size": 3},
+      {"name": "Revisit Policy", "size": 5},
+      {"name": "Politeness Policy", "size": 2}, 
+	  {"name": "Combining Policies", "size": 1}
+     ]}, 
+	{"name": "Evaluation", "size": 2}, 
+	{"name": "Trends & Research", "size": 2}, 
+	{"name": "Discussion", "size": 2}
+   ]
+  }, 
+        {
+   "name": "Multimedia IR",
+   "children": [
+    {"name": "Intro", "size": 3},
+    {"name": "The Challenges of a Web Crawler", "size": 2},
+    {"name": "Content-based Image Retrieval", "children": [
+      {"name": "Color-Based Retrieval", "size": 1},
+      {"name": "Texture", "size": 2},
+      {"name": "Salient Points", "size": 2}
+     ]},
+    {"name": "Audio & Music Retrieval", "children": [
+      {"name": "Fingerprinting", "size": 1},
+      {"name": "Speech Recognition", "size": 2},
+      {"name": "Speaker Identification", "size": 1}, 
+	  {"name": "Spoken Document Retrieval", "size": 1}, 
+	  {"name": "Audio Basics", "size": 9}
+     ]}, 
+	{"name": "Retrieving & Browsing Video", "size": 8}, 
+	{"name": "Fusion Models", "size": 6}, 
+	{"name": "Segmentation", "size": 6}, 
+	{"name": "Compression & MPEG Standards", "children": [
+      {"name": "Intensity & Sampling", "size": 1},
+      {"name": "Color", "size": 2},
+      {"name": "Lossy Compression", "size": 1}, 
+	  {"name": "Lossless Compression", "size": 1}, 
+	  {"name": "MPEG Standards", "size": 4}
+     ]}, 
+	{"name": "Trends & Research", "size": 1}, 
+	{"name": "Discussion", "size": 4}
+   ]
+  }
+ ]
+}

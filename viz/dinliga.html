@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dinliga.net-sequences of visited web pages.</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+    <link rel="stylesheet" type="text/css" href="dinligaseq.css"/>
+  </head>
+  <body>
+  			<h1>
+	Dinliga.net - sequences of visited web pages.
+	</h1>
+    <div id="main">
+      <div id="sequence"></div>
+      <div id="chart">
+        <div id="explanation" style="visibility: hidden;">
+          <span id="percentage"></span><br/>
+          of visits begin with this sequence of pages
+        </div>
+      </div>
+    </div>
+    <div id="sidebar">
+      <input type="checkbox" id="togglelegend"> Show Values<br/>
+      <div id="legend" style="visibility: hidden;"></div>
+    </div>
+    <script type="text/javascript" src="dinligaseq.js"></script>
+    <script type="text/javascript">
+      d3.select(self.frameElement).style("height", "700px");
+  </script> 
+  </body>
+  <div id="bot"><p>This example is built on a previous example by <a href="http://bl.ocks.org/kerryrodden/7090426">Kerry Rodden</a> licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License</a></p>
+</div>
+  </html>

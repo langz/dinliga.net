@@ -1,0 +1,180 @@
+index-exit, 70
+
+index-player-exit, 15
+index-player-player-exit,8
+index-player-player-player-exit, 6
+index-teamcheck-player-teamcheck-exit, 3
+index-player-teamcheck-teamcheck-player-player-exit, 1
+index-teamcheck-player-teamcheck-player-player-exit, 2
+index-player-player-player-player-exit, 7
+index-player-player-player-player-player-exit, 5
+index-player-player-player-player-player-player-exit, 4
+index-player-player-player-player-player-player-player-exit, 1
+
+index-teamcheck-exit, 6
+index-teamcheck-teamcheck-exit, 10
+index-teamcheck-teamcheck-teamcheck-exit, 12
+index-teamcheck-player-player-exit, 10
+index-teamcheck-player-teamcheck-player-exit, 4
+index-teamcheck-teamcheck-player-teamcheck-player-exit, 3
+index-player-player-teamcheck-teamcheck-exit, 1
+index-player-player-player-teamcheck-exit, 2
+index-player-teamcheck-teamcheck-teamcheck-player-exit, 2
+index-player-player-player-teamcheck-teamcheck-teamcheck-exit, 1
+
+index-statistics-exit, 2
+index-statistics-statManager-exit, 2
+index-statistics-statPlayer-player-player-player-exit, 4
+index-statistics-statPlayer-player-player-contact-exit, 1
+index-statistics-statPlayer-statistics-statPlayer-player-exit, 1
+index-statistics-statPlayer-statistics-statManager-teamcheck-exit, 1
+index-statistics-statPlayer-player-player-rules-exit, 1
+index-statistics-statPlayer-player-exit, 3
+
+index-statistics-statManager-teamcheck-exit, 3
+index-statistics-statManager-teamcheck-teamcheck-teamcheck-exit, 2
+index-statistics-statManager-teamcheck-statistics-statManager-statistics-statPlayer-player-exit, 1
+index-statistics-statManager-teamcheck-statistics-statManager-teamcheck-exit, 1
+index-statistics-statManager-teamcheck-teamcheck-teamcheck-teamcheck-teamcheck-exit, 5
+index-statistics-statManager-teamcheck-teamcheck-statistics-statPlayer-player-player-exit, 1
+index-statistics-statManager-teamcheck-teamcheck-teamcheck-exit, 3
+index-statistics-statManager-statistics-statPlayer-statistics-statManager-teamcheck-exit, 1
+
+index-contact-index-register-exit,1
+index-contact-register-login-transfer-exit,3
+index-contact-login-exit,1
+index-contact-exit,2
+index-contact-index-teamcheck-exit,1
+index-help-login-exit,1
+index-help-register-exit,1
+index-help-register-login-index-exit,2
+index-help-exit,2
+index-help-index-player-exit,1
+index-help-index-exit,2
+index-help-index-player-exit,
+index-help-contact-exit,2
+index-help-contact-index-exit,1
+index-help-contact-index-player-player-exit,3
+
+index-login-exit,1
+
+index-login-team-player-player-player-exit,3
+index-login-team-player-player-exit, 2
+index-login-team-player-player-player-player-exit, 1
+index-login-team-player-exit, 2
+index-login-team-player-player-player-player-player-player, 3
+index-login-team-player-player-points-exit, 4
+index-login-team-points-exit, 1
+index-login-team-points-player-player-exit, 2
+index-login-team-points-player-exit, 4
+index-login-team-points-player-player-player-player-exit, 2
+index-login-team-points-transfer-player-player-player-exit, 1
+index-login-transfer-points-player-player-player-exit, 3
+index-login-transfer-player-player-player-player-player-exit, 1
+index-login-team-points-player-transfer-player-player-exit, 5
+index-login-team-points-contact-exit, 1
+index-login-team-points-help-exit, 2
+index-login-transfer-points-transfer-help-exit, 3
+index-login-transfer-exit, 1
+index-login-transfer-player-player-player-player-exit, 4
+index-login-transfer-player-player-player-team-player-exit, 1
+index-login-transfer-player-player-player-exit, 2
+index-login-transfer-player-exit, 4
+index-login-transfer-team-points-exit, 1
+index-login-transfer-points-team-player-transfer-player-exit, 1
+index-login-transfer-team-points-player-player-player-exit, 2
+index-login-transfer-player-player-team-player-exit, 4
+index-login-transfer-player-player-team-points-player-transfer-player-exit, 2
+index-login-transfer-player-player-points-transfer-player-exit, 3
+index-login-transfer-team-player-player-transfer-player-player-exit, 1
+index-login-transfer-team-player-player-player-transfer-exit, 2
+index-login-transfer-player-team-points-index-player-exit, 2
+index-login-transfer-index-exit, 1
+index-login-transfer-contact-exit, 2
+index-login-transfer-help-exit, 1
+
+index-login-points-exit, 1
+index-login-points-player-player-exit, 7
+index-login-points-player-exit, 8
+index-login-points-player-player-player-player-exit, 4
+index-login-points-index-player-player-teamcheck, 2
+index-login-points-index-teamcheck-contact-help, 1
+index-login-points-transfer-player-player-player-exit, 2
+index-login-points-team-player-player-player-transfer-exit, 1
+index-login-points-transfer-player-points-player-player-exit, 2
+index-login-points-transfer-player-points-player-player-player-exit, 1 
+index-login-points-player-player-team-points-player-exit, 2
+index-login-points-team-points-player-player-exit, 2
+index-login-transfer-player-player-points-player-exit, 2
+index-login-transfer-player-player-player-points-exit, 3
+index-login-contact-help-contact-help-index-player-player,1
+index-login-points-index-points-player-player-team-player-exit,1
+index-login-index-points-player-player-player-exit, 2
+index-login-index-points-player-transfer-player-player-team-player-exit, 2
+index-login-points-player-transfer-points-player-exit, 3
+index-help-contact-player-exit,3
+index-contact-help-player-exit, 3
+index-contact-player-player-teamcheck-help-exit,2
+
+index-register-exit, 1
+index-register-index-exit, 1
+index-register-team-exit, 2
+index-register-transfer-exit, 2
+index-register-points-exit, 1
+index-register-transfer-player-player-player-exit, 1
+index-register-points-transfer-exit, 1
+index-register-points-player-player-exit, 2
+index-register-transfer-player-player-team-exit, 1
+index-register-points-player-exit, 2
+index-register-team-points-transfer-exit, 1
+index-register-points-team-transfer-exit, 2
+index-register-transfer-points-team-exit, 2
+index-register-transfer-player-player-team-exit, 3
+index-register-transfer-team-player-player-player-exit, 2
+index-register-transfer-player-player-player-exi, 1
+index-register-help-contact-exit, 1
+index-register-contact-help-exit, 2
+
+statistics-index-help-contact-exit, 1
+statistics-index-login-transfer-player-player-player-exit, 2
+statistics-index-login-tansfer-player-exit, 4
+statistics-login-points-player-exit, 1
+statistics-login-points-player-player-exit, 2
+statistics-help-contact-register-exit, 4
+statistics-contact-help-login-exit, 1
+statistics-register-exit, 2
+statistics-index-player-player-player-exit, 3
+statistics-index-teamcheck-teamcheck-statistics-statManager-teamcheck-exit, 1
+statistics-index-teamcheck-teamcheck-player-player-exit, 1
+statistics-index-player-player-player-player-exit, 2
+statistics-statManager-teamcheck-exit, 2
+statistics-statPlayer-player-exit, 3
+statistics-statManager-statistics-statPlayer-player-exit, 1
+statistics-statManager-statistics-statManager-teamcheck-exit, 2
+statistics-statManager-statistics-statManager-exit, 4
+statistics-statManager-statistics-statPlayer-exit, 2
+statistics-statManager-index-contact-help-exit, 1
+statistics-statManager-index-login-team-transfer-player-player-player-exit, 4
+statistics-statManager-index-statistics-statManager-statistics-statPlayer-player-player-exit, 3
+statistics-statManager-teamcheck-teamcheck-exit, 4
+statistics-statManager-teamcheck-teamcheck-teamcheck-teamcheck-exit, 4
+statistics-statManager-teamcheck-statistics-statManager-teamcheck-exit, 2
+statistics-statManager-teamcheck-statistics-statPlayer-player-exit, 2
+statistics-statPlayer-statistics-statManager-teamcheck-teamcheck-exit, 4
+statistics-statPlayer-player-player-player-player-exit, 5
+statistics-statPlayer-player-player-exit, 7
+statistics-statPlayer-player-player-player-exit, 2
+statistics-statPlayer-player-player-statistic-statPlayer-player-exit, 5
+statistics-statPlayer-statistics-statManager-teamcheck-teamcheck-exit, 3
+statistics-statPlayer-index-contact-help-exit, 2
+statistics-statPlayer-index-login-transfer-player-player-exit, 1
+statistics-statPlayer-index-login-transfer-points-team-player-player-exit, 2
+statistics-index-login-transfer-team-points-player-exit, 5
+statistics-index-login-team-transfer-player-player-exit, 4
+statistics-index-help-contact-exit, 2
+statistics-index-player-teamcheck-teamcheck-contact-exit, 1
+statistics-index-player-exit, 3
+statistics-index-player-player-exit, 1
+statistics-exit, 20
+
+

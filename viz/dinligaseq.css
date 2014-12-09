@@ -1,0 +1,71 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: #fff;
+  width: 960px;
+  height: 700px;
+  margin-top: 10px;
+}
+
+#main {
+  float: left;
+  width: 750px;
+}
+
+#sidebar {
+  float: right;
+  width: 100px;
+}
+
+#sequence {
+  width: 600px;
+  height: 70px;
+}
+
+#legend {
+  padding: 10px 0 0 3px;
+}
+
+#sequence text, #legend text {
+  font-weight: 600;
+  fill: #fff;
+}
+
+#chart {
+  position: relative;
+}
+
+#chart path {
+  stroke: #fff;
+}
+
+#explanation {
+  position: absolute;
+  top: 260px;
+  left: 305px;
+  width: 140px;
+  text-align: center;
+  color: #666;
+  z-index: -1;
+}
+
+#percentage {
+  font-size: 2.5em;
+}
+#bot{
+float:left;
+width:960px;
+}
+h1{font-family: Georgia, "Times New Roman", Times, serif;
+        font-size:24px;
+	margin-top: 5px; margin-bottom: 0px;
+	text-align: center;
+        font-weight: normal;
+        color: #222;}
+		p{         font-family: Georgia, "Times New Roman", Times, serif;
+	  color:#381704;
+	  font-size:10px;
+	  letter-spacing:0.1em;
+	  line-height:200%;
+text-align:center;}

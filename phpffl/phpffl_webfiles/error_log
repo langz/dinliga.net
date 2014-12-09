@@ -1,0 +1,3 @@
+[17-Feb-2014 22:48:28 UTC] PHP Warning:  mysql_connect(): Access denied for user 'USER'@'localhost' (using password: YES) in /home/dinlipbf/public_html/phpffl/phpffl_webfiles/program_files/adodb/drivers/adodb-mysql.inc.php on line 346
+[17-Feb-2014 22:48:39 UTC] PHP Warning:  mysql_connect(): Access denied for user 'USER'@'localhost' (using password: YES) in /home/dinlipbf/public_html/phpffl/phpffl_webfiles/program_files/adodb/drivers/adodb-mysql.inc.php on line 346
+[17-Feb-2014 22:48:53 UTC] PHP Warning:  mysql_connect(): Access denied for user 'USER'@'localhost' (using password: YES) in /home/dinlipbf/public_html/phpffl/phpffl_webfiles/program_files/adodb/drivers/adodb-mysql.inc.php on line 346
